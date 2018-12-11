@@ -37,20 +37,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     netutils-wrapper-1.0
 
-# Additional settings used in all AOSP builds
-ifeq ($(wildcard vendor/six/google/GoogleAudio.mk),)
-PRODUCT_PROPERTY_OVERRIDES := \
-    ro.config.ringtone=Ring_Synth_04.ogg \
-    ro.config.notification_sound=pixiedust.ogg
-endif
-
 # Put en_US first in the list, so make it default.
 PRODUCT_LOCALES := en_US
 
 # Get some sounds
-ifeq ($(wildcard vendor/six/google/GoogleAudio.mk),)
-$(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
-endif
+$(call inherit-product-if-exists, frameworks/base/data/sounds/GoogleAudio.mk)
 
 # Get a list of languages.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
